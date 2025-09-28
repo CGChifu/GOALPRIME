@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Grid of Iframes</title>
+  <style>
+    :root{
+      --gap: 16px;
+      --card-bg: #fafafa;
+      --card-border: #e6e6e6;
+    }
+
+    body{
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      margin: 24px;
+      background: #fff;
+      color: #111;
+    }
+
+    h1{ margin: 0 0 16px 0; font-size: 1.25rem; }
+
+    /* Grid layout: auto-fit columns with a minimum width */
+    .grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--gap);
+      align-items: start;
+    }
+
+    .card {
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header{
+      padding: 10px 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-bottom: 1px solid var(--card-border);
+      background: linear-gradient(180deg, rgba(0,0,0,0.01), transparent);
+    }
+
+    /* Responsive iframe container: use aspect-ratio to keep proportional height */
+    .iframe-wrap{
+      width: 100%;
+      /* default 16:9, you can override per-item with a class or style attribute */
+      aspect-ratio: 16 / 9;
+      background: #000; /* shows while loading */
+    }
+
+    .iframe-wrap iframe{
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    /* small tweak for very tall embeds */
+    .tall { aspect-ratio: 4 / 3; }
+
+    @media (min-width: 1000px){
+      /* example: give the first column a larger visual weight at wide sizes (optional) */
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 align="center">WASH FACILITIES MAPPING MONGUNO</h1>
+
+  <div class="grid">
+    <!-- Card 1 -->
+    <section class="card">
+      <div class="card-header">GOALPRIME</div>
+      <div class="iframe-wrap">
+        <iframe
+          id="inlineFrameExample"
+          title="Inline Frame Example - GOALPRIME"
+          src="https://cgchifu.github.io/GOALPRIME/"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </section>
+
+    <!-- Card 2 (Power BI) -->
+    <section class="card">
+      <div class="card-header">WASH FACILITIES MAPPING (Power BI)</div>
+      <!-- Power BI is a bit taller; use .tall to change aspect-ratio -->
+      <div class="iframe-wrap tall">
+        <iframe
+          title="WASH FACILITIES MAPPING"
+          src="https://app.powerbi.com/view?r=eyJrIjoiMThmOGYyMDYtYmQ0MC00NmExLWEwYmItZWMzNTQzMGY2NmE5IiwidCI6IjQ5ZmE1NDViLWI2ZmMtNDE2ZC1iMDBlLTFlNjJiZjc5NGIyNyJ9"
+          allowfullscreen="true"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
